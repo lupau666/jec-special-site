@@ -1,0 +1,1701 @@
+/* =========================================
+   日本電子専門学校 Webデザイン科 特設サイト
+   style.css （CSS変数は使わず直接値を記述）
+========================================= */
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+p, li, a { font-weight: 700; }
+h1, h2, h3 {
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  font-weight: 900;
+  margin: 0;
+}
+
+/* 大見出し（キャッチコピー）だけ Dela Gothic One。
+   1ウェイトしかない上に字面が太いため、字間を広めに取って
+   文字同士がくっついて見えないように調整しています。 */
+.hero-title, .about-catch, .ba-sub {
+  font-family: "Dela Gothic One", "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+}
+
+/* Hero だけは指定サイズ（64px前後）＆行間を詰めたいので個別に上書き */
+.hero-title {
+  line-height: 1.3;
+}
+
+/* サイト全体の最大幅コンテナ：Figma上のデザイン幅(1440px)に合わせ、
+   左右は常に48pxの余白を確保する */
+.container,
+.header-inner,
+.section-inner,
+.footer-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.section { padding: 100px 0; position: relative; }
+
+/* ボタン共通 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* hover時は影を付けず、メインビジュアルの青に変化させる */
+.btn--orange,
+.btn--green {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: #fff;
+}
+.btn--orange { background: #FF7B16; }
+.btn--green  { background: #00AC39; }
+
+.btn--orange .btn-label,
+.btn--green .btn-label {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+}
+
+
+.btn--orange::after,
+.btn--green::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 140%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: #1670FF;
+  transform: translate(-50%, 60%) scale(0);
+  transform-origin: center;
+  z-index: 1;
+  transition: transform 0.5s cubic-bezier(0.34, 1.35, 0.64, 1);
+}
+
+.btn--orange:hover::after,
+.btn--green:hover::after {
+  transform: translate(-50%, 60%) scale(1);
+}
+.btn--lg { padding: 18px 72px; font-size: 1.2rem; border-radius: 12px; gap: 16px;}
+
+.btnlg-icon {
+  display: block;
+  width: 20px !important;
+  height: auto !important;
+  flex-shrink: 0;
+}
+
+/* ===== HEADER ===== */
+.site-header {
+  position: sticky;
+  top: 0; z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 0 0 24px 24px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.header-inner {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo img {
+    width: 320px;
+    height: auto;
+    display: block;
+}
+/* 右側：ナビ + ボタンをまとめたグレーの999pxピル（サイズを一回り大きく） */
+.nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  background: transparent;
+  border-radius: 999px;
+  padding: 14px 32px 14px 60px;
+}
+
+.main-nav ul { display: flex; gap: 36px; }
+.main-nav a { font-family: "Noto Sans JP", sans-serif; font-size: 16px; font-weight: 700; transition: 0.2s ease; position: relative; }
+.main-nav a:hover { color: #1670FF; }
+/* 🌟 新增這段：製作隱藏的藍色底線 */
+.main-nav a::after {
+  content: "";            /* 必須有 content 才會顯示 */
+  position: absolute;
+  left: 0;
+  bottom: -4px;           /* 控制線條距離文字底部的距離 */
+  width: 100%;            /* 線條跟文字一樣寬 */
+  height: 2px;            /* 線條的粗細 */
+  background: #1670FF;    /* 藍色線條 */
+  
+  /* 動畫關鍵設定 */
+  transform: scaleX(0);   /* 預設把線條水平縮放到 0 (看不見) */
+  transform-origin: left; /* 🌟 設定變形的起點在「左側」，這樣長出來才會是從左到右 */
+  transition: transform 0.3s ease; /* 線條長出來的速度 */
+}
+
+/* 🌟 新增這段：滑鼠移上去時，線條展開 */
+.main-nav a:hover::after {
+  transform: scaleX(1);   /* 把線條水平放大回原本的寬度 (100%) */
+}
+
+.header-cta { display: flex; gap: 12px; }
+.header-cta .btn { padding: 8px 20px; font-size: 1rem; }
+
+.nav-toggle {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 32px; height: 32px; background: none; border: none; cursor: pointer;
+}
+.nav-toggle span { width: 100%; height: 2px; background: #1a1a1a; }
+
+/* ===== HERO ===== */
+.hero { 
+  position: relative; 
+  width: 100%;
+  min-height: 100vh; /* 讓外層區塊永遠至少有螢幕的 100% 高度 */
+  display: flex; 
+  align-items: center; /* 讓裡面的 .hero-inner 永遠保持在正中間 */
+  overflow: hidden; 
+  padding: 0;
+  margin-top: -36px;
+}
+
+.hero-waves {
+  position: absolute;
+  top: 6px;
+  width: 100%;
+  z-index: 0;
+  opacity: 0.9;
+}
+.hero-waves svg { 
+  width: 100%; height: 100%;
+  transform: translateY(-16px); 
+  overflow: visible; }
+
+.animated-wave {
+  /* 設定這條新線段的總長度與偏移量 */
+  stroke-dasharray: 4000;
+  stroke-dashoffset: 4000; /* 初始完全隱藏 */
+  
+  /* 執行畫線動畫：3秒，絲滑動態，停在最後一格 */
+  animation: strokeDraw 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0.6;
+}
+
+@keyframes strokeDraw {
+  to {
+    stroke-dashoffset: 0; /* 歸零後，線條就會順著你原本的曲折度，從左到右一筆畫出來！ */
+  }
+}
+
+.hero-inner {
+  position: relative; 
+  z-index: 1;
+  width: 100%; /* 確保吃到 max-width 的限制 */
+  max-width: 1440px;
+  /* height: 100vh; ⚠️ 這行已經刪掉，高度交給外層 .hero 控制 */
+  margin: 0 auto; 
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center; /* 讓左邊文字與右邊照片群組互相垂直置中 */
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  margin: 0 0 12px;
+  overflow: hidden;
+}
+
+/* ===== Title Left Wipe ===== */
+.hero-title .line1,
+.hero-title .line2 {
+  display: inline-block;
+  position: relative;
+  background: #fff;
+  line-height: 1;
+  padding: 4px 16px;
+  margin-bottom: 12px;
+  clip-path: inset(0 100% 0 0);
+  animation: titleWipe 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: clip-path;
+}
+.hero-title .line1 { animation-delay: 0.8s; }
+.hero-title .line2 { animation-delay: 1.2s; }
+
+@keyframes titleWipe {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* Hero 說明文字 */
+.hero-lead {
+  display: inline-block;
+  position: relative;
+  background: #fff;
+  padding: 10px 16px;
+  font-size: clamp(0.6rem, 1.2vw, 1.2rem);
+  font-weight: 700;
+  margin: 0 0 32px;
+  clip-path: inset(0 100% 0 0);
+  animation: titleWipe 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: clip-path;
+  animation-delay: 1.6s;
+}
+
+/* CTA 按鈕 */
+.hero-copy .btn {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroFadeUp .8s ease-out 2s forwards;
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 右側圖片 */
+.hero-gallery {
+  opacity: 0;
+  transform: translateX(60px);
+  animation: heroGalleryIn 1.2s cubic-bezier(.22, .61, .36, 1) 1s forwards;
+}
+
+@keyframes heroGalleryIn {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+mark { background: none; padding: 0 2px; }
+.mark-blue { color: #1670FF; }
+.mark-orange { color: #FF7B16; }
+.mark-yellow { color: #FFF35C; }
+
+.hero-gallery{
+    position:relative;
+    width:100%;
+    aspect-ratio:1/1;
+}
+
+.hero-photo{
+    position:absolute;
+    overflow:hidden;
+    border-radius:24px;
+    border: solid 4px #FFF;
+}
+
+.hero-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+/* =========================================
+   ===== 🌟 隨機漂浮動畫定義 =====
+   ========================================= */
+@keyframes floating {
+  0%   { transform: translate(0px, 0px); }
+  20%  { transform: translate(1px, -2px); }
+  40%  { transform: translate(-2px, 1px); }
+  60%  { transform: translate(3px, 2px); }
+  80%  { transform: translate(-2px, -3px); }
+  100% { transform: translate(0px, 0px); } /* 回到原點確保動畫無縫循環 */
+}
+
+/* =========================================
+   ===== 更新圖片的 CSS，加入 animation =====
+   ========================================= */
+.g1 {
+  z-index: 1;
+  width: 36%;
+  aspect-ratio: 1/1;
+  top: 4%;
+  right: 10%;
+  /* 7秒飄完一圈，無限循環 */
+  animation: floating 20s ease-in-out infinite; 
+}
+
+.g2 {
+  z-index: 3;
+  width: 64%;
+  aspect-ratio: 4/3;
+  top: 24%;
+  left: 0;
+  /* 9秒飄一圈，加上 alternate 讓它忽正忽反地飄 */
+  animation: floating 14s ease-in-out infinite alternate; 
+  /* 🌟 魔法屬性：負數延遲！讓它一載入就像是已經飄了 3 秒，徹底打亂跟 g1 的節奏 */
+  animation-delay: -3s; 
+}
+
+.g3 {
+  z-index: 2;
+  width: 52%;
+  aspect-ratio: 4/3;
+  right: 1%;
+  bottom: 10%;
+  /* 8秒飄一圈，用 alternate-reverse 另一種反向軌跡 */
+  animation: floating 16s ease-in-out infinite alternate-reverse; 
+  /* 一樣打亂節奏 */
+  animation-delay: -5s; 
+}
+/* ===== 共通見出し ===== */
+.section-heading { text-align: center; margin: 0 0 64px; }
+.heading-en {
+  display: block;
+  font-family: "MuseoModerno", sans-serif;
+  font-size: clamp(2.2rem, 4rem, 4.4rem);
+  font-weight: 700;
+  color: #1670FF;
+  line-height: 1.1;
+}
+.heading-ja {
+  display: block;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  margin-top: 4px;
+}
+.section-heading--light .heading-en,
+.section-heading--light .heading-ja { color: #fff; }
+
+/* About / Course / Career の見出しだけ：英語と日本語を横並び＋左寄せ */
+.about .section-heading,
+.course .section-heading,
+.career .section-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  text-align: left;
+}
+.about .section-heading .heading-en,
+.course .section-heading .heading-en,
+.career .section-heading .heading-en,
+.about .section-heading .heading-ja,
+.course .section-heading .heading-ja,
+.career .section-heading .heading-ja {
+  display: inline;
+  margin-top: 0;
+}
+
+/* ===== ABOUT ===== */
+
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center; /* 垂直置中 */
+}
+
+.about-catch { font-size: 2.4rem; margin-bottom: 36px; line-height: 1.25;}
+.about-tags { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; margin: 0;}
+.tag { padding: 4px 12px; border-radius: 4px; color: #fff; font-size: 1rem; }
+.tag--blue { background: #6D7EFF; }
+.tag--green { background: #0AD498; }
+.tag--coral { background: #FA7C7C; }
+.about-desc { font-weight: 700; color: #000000; margin-top: 8px;}
+.about-venn svg { width: 100%; height: auto; }
+
+/* 🌟 修改這裡：讓這個容器在 Grid 軌道裡水平置中 */
+.about-pic { 
+  width: 480px; 
+  height: auto;
+  justify-self: center; /* 關鍵：讓自己（div）在 Grid 的右半邊水平置中 */
+}
+
+/* 🌟 新增這裡：確保圖片完美填滿容器且不破版 */
+.about-pic img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+/* ===== COURSE（一般的なスライダー） =====
+   トラック全体を transform: translateX() で1枚分ずつ動かす方式。
+   「次へ」を押すと、右側に半分見えていたカードがそのまま
+   左へスライドしてきて中央に入る＝新しいカードが右から入ってくる。 */
+.course-carousel { display: flex; align-items: center; gap: 60px; justify-content: center;}
+
+.course-viewport {
+  flex: 1;
+  max-width: 1048px;
+  overflow: hidden;
+}
+
+.course-track {
+  display: flex;
+  gap: 24px;
+  transition:  transform .3s cubic-bezier(.3,0,.2,1);
+  will-change: transform;
+}
+
+.course-card {
+  flex: 0 0 min(340px, 78vw);
+  background: linear-gradient(180deg, #8fb4ff 0%, #1670FF 100%);
+  border-radius: 24px;
+  padding: 24px;
+  color: #fff;
+  opacity: .45;
+  transform: scale(0.94);
+  transition: opacity .5s ease, transform .5s ease, background-color .5s ease;
+}
+
+.course-card.isActive {
+  background: linear-gradient(180deg, #4c8bff 0%, #1670FF 100%);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.course-thumb {
+  display: block;
+  width: 100%;
+  height: 180px;              /* 可自行調整高度 */
+  object-fit: cover;          /* 自動裁切填滿 */
+  object-position: center;    /* 圖片置中 */
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.course-card h3 { text-align: center; margin: 0 0 24px; font-size: 1.2rem; font-weight: 900; }
+.course-card p { font-size: 1rem; font-weight: 500; }
+
+.carousel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 36px; height: 84px;
+  border-radius: 24px;
+  border: 3px solid #1670FF;
+  background: #fff;
+  color: #1670FF;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+
+.carousel-btn:hover { background: #1670FF; color: #fff; }
+.carousel-btn:disabled {
+  opacity: .3;
+  cursor: default;
+  pointer-events: none;
+}
+.carousel-btn img {
+  display: block;
+  width: 24px !important;
+  height: 24px !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
+.carousel-btn.prev:hover img {
+  content: url("../img/arrow_l_w.svg");
+}
+
+.carousel-btn.next:hover img {
+  content: url("../img/arrow_r_w.svg");
+}
+
+.carousel-btn.prev:disabled img {
+  content: url("../img/arrow_l.svg");
+}
+
+.carousel-btn.next:disabled img {
+  content: url("../img/arrow_r.svg");
+}
+
+.carousel-dots { display: flex; justify-content: center; gap: 10px; margin-top: 48px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #cdd6e8; cursor: pointer; }
+.dot--active { background: #1670FF; }
+
+/* =========================================
+   ===== INTERVIEW 藍底背景與網格排版 =====
+   ========================================= */
+.interview { padding: 0; }
+
+.interview-panel {
+  position: relative;
+  background: #1670FF;  /* 這裡就是你的藍色背景 */
+  border-radius: 48px;
+  overflow: hidden;
+  padding: 80px 48px;
+}
+
+.interview-wave { 
+  position: absolute; 
+  inset: 0; 
+  width: 100%; 
+  height: 100%; 
+  pointer-events: none; /* 確保波浪不會干擾滑鼠事件 */
+}
+
+.interview-inner { 
+  position: relative; 
+  z-index: 1; 
+  margin-bottom: 36px;
+}
+
+.interview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 讓卡片左右兩排放置 */
+  gap: 24px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   ===== 3D 翻轉卡片核心設定 =====
+   ========================================= */
+/* 3D 翻轉卡片外框（限制範圍用） */
+.interview-card {
+  background: transparent !important;
+  perspective: 1000px;
+  height: 400px; /* ⚠️ 確保卡片有固定高度，排版才不會跑掉 */
+  padding: 0;
+  border: none;
+}
+
+/* 負責執行的核心內層 */
+.interview-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+/* Hover 時翻轉內層 */
+.interview-card:hover .interview-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* 正面與背面共用的「白色卡片」設定 */
+/* =========================================
+   ===== 共用卡片底板 =====
+   ========================================= */
+.interview-card-front,
+.interview-card-back {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px; /* 卡片內距 */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 標籤樣式 */
+.front-badge {
+  display: inline-block; 
+  background: #1670FF; 
+  color: #fff;
+  font-size: 1.2rem; 
+  font-weight: 700; 
+  padding: 4px 16px; 
+  border-radius: 999px;
+}
+
+.back-badge {
+  display: inline-block; 
+  background: #1670FF; 
+  color: #fff;
+  font-size: 1rem; 
+  font-weight: 700; 
+  padding: 4px 16px; 
+  border-radius: 999px;
+}
+
+/* =========================================
+   ===== 正面專屬排版 =====
+   ========================================= */
+.interview-card-front {
+  transform: rotateY(0deg);
+}
+/* 讓「何か一言」佔滿上方空間並置中 */
+.front-content {
+  flex: 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.front-message {
+  color: #1670FF;
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin: 0;
+  padding: 24px;
+  line-height: 1.6;
+  text-align: center;
+  
+}
+/* 底部標籤與名字置中對齊 */
+.front-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.front-name {
+  color: #1670FF;
+  font-weight: 700;
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+/* =========================================
+   ===== 背面專屬排版 =====
+   ========================================= */
+.interview-card-back {
+  transform: rotateY(180deg);
+}
+.interview-thumb-wrap {
+  position: relative;
+  overflow: visible;
+  margin-bottom: 16px;
+  clip-path: inset(-260px 0px 0px 0px round 0px 0px 12px 12px);
+}
+
+/* 灰色圖片佔位區 */
+.interview-thumb {
+  min-height: 180px;
+  background: #3d87ff;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.interview-person {
+  position: absolute;
+  left: 50%;
+  bottom: -100px;           /* 初始：完全藏在灰框最下方，看不到 */
+  width: auto;
+  height: 260px;             /* 比灰框(180px)高80px，這80px就是超出框外露出來的部分 */
+  transform: translateX(-50%);
+  object-fit: contain;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: bottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+}
+
+.interview-person-down{
+  position: absolute;
+  left: 50%;
+  width: auto;
+  height: 180px;            
+  transform: translateX(-50%);
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
+  transition: bottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+}
+
+/* 翻牌觸發（跟卡片hover翻面同一個開關）：跳到底部貼齊灰框，人物冒出來 */
+.interview-card:hover .interview-person {
+  bottom: -20px;
+  opacity: 1;
+  transition-delay: 0.3s;   /* 等翻牌轉過一半、背面朝向使用者後，人物才跳出來 */
+}
+
+.back-title { 
+  color: #1670FF; 
+  font-size: 1.2rem; 
+  margin: 0 0 16px; 
+  text-align: center;
+  font-weight: 900;
+}
+/* 背面底部容器：左右排開，貼齊底部 */
+.back-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* 讓箭頭跟名字底部對齊 */
+  margin-top: auto; /* 魔法屬性：把這塊推到卡片最下面 */
+  width: 100%;
+}
+/* 底部左側：標籤與名字靠左上下排列 */
+.back-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.interview-name { 
+  font-weight: 700; 
+  display: flex; 
+  align-items: baseline; /* 讓名字和出身的文字底部對齊 */
+  gap: 12px; 
+  font-size: 1.2rem; 
+  color: #1670FF; 
+  margin: 0 0 0 6px;
+}
+.interview-from { 
+  font-weight: 700; 
+  color: #1670FF; 
+  font-size: 1rem; 
+}
+/* 箭頭按鈕 */
+.arrow-btn {
+  font-size: 20px;
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%; 
+  background: #1670FF; 
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.2s;
+  flex-shrink: 0; /* 防止按鈕被擠扁 */
+}
+.arrow-btn:hover {
+  transform: scale(1.25) rotate(-15deg);
+}
+
+/* ===== BEFORE -> AFTER ===== */
+
+/* 上面的白色圓角 */
+.before-after::before,
+.before-after::after{
+    content: "";
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    height: 60px;          /* 比原本小 */
+    background: #fff;
+    border-radius: 999px;
+    z-index: 0;
+}
+
+.before-after::before{
+    top: -30px;            /* 高度的一半 */
+}
+
+.before-after::after{
+    bottom: -30px;
+}
+
+/* 內容放最上面 */
+.ba-bgtext,
+.ba-content{
+    position:relative;
+    z-index:1;
+}
+
+.before-after-wrap { padding: 80px 0px; }
+.before-after {
+  position: relative;
+  background: #FF7B16;
+  color: #fff;
+  overflow: hidden;
+  padding: 96px 120px 200px 120px;
+}
+/* PRO文字の背景：5行それぞれが同じ速度・別々の開始位置（負のanimation-delay）で
+   横に流れ続ける。行間は詰めて0にしている。各行 .ba-row-track 内に同じ内容の
+   .ba-row-group を2つ並べて -50%移動＝継ぎ目のない無限ループにしている。 */
+.ba-bgtext {
+  position: absolute; inset: 0;
+  top: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.ba-row { overflow: hidden; white-space: nowrap; line-height: 1; }
+.ba-row-track {
+  display: inline-flex;
+  animation: ba-scroll 28s linear infinite;
+}
+.ba-row:nth-child(1) .ba-row-track { animation-delay: 0s; }
+.ba-row:nth-child(2) .ba-row-track { animation-delay: -6s; }
+.ba-row:nth-child(3) .ba-row-track { animation-delay: -12s; }
+.ba-row:nth-child(4) .ba-row-track { animation-delay: -18s; }
+.ba-row:nth-child(5) .ba-row-track { animation-delay: -24s; }
+.ba-row:nth-child(6) .ba-row-track { animation-delay: -30s; }
+.ba-row:nth-child(7) .ba-row-track { animation-delay: -36s; }
+.ba-row:nth-child(8) .ba-row-track { animation-delay: -42s; }
+
+.ba-row-group {
+  font-family: "MuseoModerno", sans-serif;
+  font-size: 7rem;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255,255,255,0.12);
+}
+
+@keyframes ba-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ba-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.ba-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 80px;
+  font-family: "MuseoModerno", sans-serif;
+  font-size: clamp(3rem,5rem,6rem);
+  font-weight: 900;
+  gap: 24px;
+  margin: 36px 0 12px 0;
+}
+.ba-arrowsall {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.ba-arrows1 { color: rgba(255, 255, 255, 0.5); font-size: 2.4rem; }
+.ba-arrows2 { color: rgba(255, 255, 255, 0.7); font-size: 2.4rem; }
+.ba-arrows3 { color:  rgba(255, 255, 255); font-size: 2.4rem; }
+.ba-arrows1,.ba-arrows2,.ba-arrows3 {
+  display: inline-block;
+  line-height: 1;
+}
+.ba-sub { text-align: center; font-size: clamp(2rem,3.6rem,4rem); margin-top: 0px; margin-bottom: 48px; color: #fff; }
+
+/* =========================================
+   ===== 雙色卡片排版 =====
+   ========================================= */
+.ba-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 24px;
+  overflow: hidden; 
+}
+
+.ba-card { 
+  color: #fff; 
+  display: flex;
+  flex-direction: column;
+}
+
+/* 上半部標題區 */
+.ba-head { 
+  text-align: center; 
+  padding: 36px 32px; 
+}
+.ba-head h3 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1;
+  font-family:"Dela Gothic One", sans-serif;
+}
+
+.ba-head span {
+  display: block;
+  margin-top: 12px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* 下半部內容區 */
+.ba-body {
+  padding: 32px; 
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🌟 照片容器設定 */
+.ba-thumb { 
+  width: 100%;
+  aspect-ratio: 16 / 9; /* 固定比例，避免不同照片高度不一樣 */
+  background: #fff; 
+  border-radius: 12px; /* 圖片外框圓角 */
+  overflow: hidden; /* 確保塞進去的 img 不會突出去，乖乖貼齊圓角 */
+  margin-bottom: 24px; 
+}
+.ba-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 讓圖片自動填滿且不變形 */
+  display: block;
+}
+
+/* 底部文字 */
+.ba-card p { 
+  font-size: 1.2rem; 
+  line-height: 1.8;
+  text-align: left; 
+  margin-bottom: 24px;
+  padding: 0 48px;
+}
+
+/* =========================================
+   ===== 顏色設定（上下分色） =====
+   ========================================= */
+/* 藍色卡片 */
+.ba-card--indigo .ba-head { background: #3c4ff4; }
+.ba-card--indigo .ba-body { background: #6273FF; }
+
+/* 綠色卡片 */
+.ba-card--green .ba-head { background: #00ba7a; }
+.ba-card--green .ba-body { background: #0bd699; }
+
+
+/* ===== WORKS ===== */
+.works { padding-top: 0; }
+
+.section-heading--line { display: flex; align-items: center; gap: 20px; justify-content: center; margin-bottom: 4px; }
+.section-heading--line .line { flex: 1; max-width: 260px; height: 1px; background: #1a1a1a; }
+.heading-block .heading-en { color: #1670FF; }
+.heading-ja.center { text-align: center; font-size: 1.2rem; font-weight: 900; margin: 0 0 40px; }
+
+/* 学生作品：10枚の画像が途切れず流れ続けるマーキー */
+.works-marquee {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.works-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: works-scroll 48s linear infinite;
+}
+.works-track:hover { animation-play-state: paused; }
+.works-thumb{
+    width:360px;
+    aspect-ratio:16/9;
+    flex:0 0 auto;
+
+    overflow:hidden;
+    border-radius:12px;
+}
+
+.works-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:fill;
+    display:block;
+}
+
+@keyframes works-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== CAREER（Scroll + Sticky Card） =====
+   各カードを .career-sticky でラップし、position:sticky で
+   スクロールに合わせて1枚ずつ重なるように積み上げる。
+   見出しはスクロールでは固定せず、通常のまま左寄せで表示。
+   1024px以下では通常のブロック表示に戻す（メディアクエリ側で解除）。 */
+   
+
+.career .section-heading {
+  text-align: left;
+  margin-bottom: 96px;
+}
+
+.career-list { display: block; }
+.career-sticky + .career-sticky { margin-top: 240px; }
+
+/* サイト共通ヘッダー（sticky, 高さ約114px）と重ならないよう、
+   十分な余白を取ってから積み上げを開始する。
+   カード間の間隔も広めに取り、下のカードの色が少し覗くようにする。 */
+.career-sticky {
+  position: sticky;
+}
+.career-sticky:nth-of-type(1) { top: 128px; z-index: 1; }
+.career-sticky:nth-of-type(2) { top: 184px; z-index: 2; }
+.career-sticky:nth-of-type(3) {
+  position: relative;
+  margin-top: 440px;
+  z-index: 3;
+}
+
+.career-card {
+  position: relative;
+  overflow: visible;
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 24px;
+  padding: 60px 40px 40px;
+  color: #fff;
+}
+
+.career-card--blue { background: #6D7EFF; }
+.career-card--green { background: #0AD498; }
+.career-card--red { background: #FA7C7C; }
+
+.career-label-blue {
+  position: absolute; top: -20px; left: 40px;
+  background: #3B4FEA;
+  padding: 8px 60px;
+  border-radius: 999px;
+  font-family:"Dela Gothic One", sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+.career-label-green {
+  position: absolute; top: -20px; left: 40px;
+  background: #00AC78;
+  padding: 8px 60px;
+  border-radius: 999px;
+  font-family:"Dela Gothic One", sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+.career-label-red {
+  position: absolute; top: -20px; left: 40px;
+  background: #DA6060;
+  padding: 8px 60px;
+  border-radius: 999px;
+  font-family:"Dela Gothic One", sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.career-body { display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: top; }
+.career-thumb {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.career-jobs-title-blue{
+  display: block; background: #fff; color: #6D7EFF;
+  text-align: center; padding: 10px; border-radius: 10px; font-weight: 700; font-size: 1.2rem;
+  margin-top: 12px; margin-bottom: 28px;
+}
+.career-jobs-title-green{
+  display: block; background: #fff; color: #0AD498;
+  text-align: center; padding: 10px; border-radius: 10px; font-weight: 700; font-size: 1.2rem;
+  margin-top: 12px; margin-bottom: 28px;
+}
+.career-jobs-title-red{
+  display: block; background: #fff; color: #FA7C7C;
+  text-align: center; padding: 10px; border-radius: 10px; font-weight: 700; font-size: 1.2rem;
+  margin-top: 12px; margin-bottom: 28px;
+}
+
+.career-jobs ul { text-align: center; font-weight: 700; display: flex; flex-direction: column; gap: 12px; }
+
+/* カード左下にはみ出す形で置くイラスト用の空きスペース */
+.career-illust {
+  position: absolute;
+  left: -2px;
+  bottom: -36px;
+  width: 360px;
+  height: auto;
+  z-index:4;
+}
+
+/* ===== MARQUEE（OPEN CAMPUS帯） =====
+   .marquee-track の中に全く同じ内容の .marquee-group を2つ並べ、
+   ちょうど半分（-50%）だけ動かすことで継ぎ目のない無限ループにする。 */
+.marquee {
+  background: #FF7B16;
+  color: #fff;
+  overflow: hidden;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 26s linear infinite;
+}
+.marquee-group {
+  display: flex;
+  flex-shrink: 0;
+}
+.marquee-group span {
+  font-family: "MuseoModerno", sans-serif;
+  font-size: 72px;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 0 28px;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+
+/* ===== CTA CARDS ===== */
+
+#opencampus{
+  padding-top: 100px;
+}
+
+.cta-cards { padding-top: 70px; position: relative; overflow: hidden; }
+
+.cta-waves { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+
+.wave { position: absolute; }
+
+.wave--green {
+  bottom: 280px;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 1440 / 581;
+}
+.wave--purple {
+  top: 360px;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  aspect-ratio: 865 / 802;
+}
+.wave--pink {
+  top: 120px;
+  bottom: 0;
+  right: 0;
+  width: 45%;
+  aspect-ratio: 821 / 1065;
+}
+
+.cta-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.cta-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  color: #fff;
+}
+.cta-card--orange { background: #FF7B16; }
+.cta-card--green { background: #00AC39; }
+
+/* 写真エリア：カードの一番上に貼りつく、タイトルはこの上に絶対配置で重なる */
+.cta-photo {
+  position: relative;
+  width:100%;
+  height:100%;
+  display:block;
+  overflow: hidden;
+}
+.cta-photo img{
+  width: 100%;
+  min-height: 560px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.cta-card:hover .cta-photo img {
+  transform: scale(1.05); /* 等比例放大 1.2 倍 */
+}
+
+
+.cta-photo .cta-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* タイトルの「旗」：左上はカードの角に合わせて直角、右下だけ丸くする */
+.cta-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  padding: 56px 64px;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.3;
+  border-radius: 20px 0 28px 0;
+}
+.cta-card--orange .cta-title { background: #FF7B16; }
+.cta-card--green .cta-title { background: #00AC39; }
+
+/* 下部：説明文＋丸い矢印ボタンを並べる帯 */
+.cta-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 36px 48px;
+}
+.cta-footer p { font-size: 1.2rem; margin: 0; flex: 1; }
+
+.arrow-circle {
+  flex-shrink: 0;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.cta-card--orange .arrow-circle { color: #FF7B16; transition: transform 0.2s;
+  flex-shrink: 0;}
+.cta-card--green .arrow-circle { color: #00AC39; transition: transform 0.2s;
+  flex-shrink: 0;}
+.cta-card--orange:hover .arrow-circle { transform: scale(1.25);}
+.cta-card--green:hover .arrow-circle { transform: scale(1.25);}
+
+
+/* ===== FOOTER ===== */
+.site-footer { background: #1670FF; color: #fff; padding: 96px 0; border-radius: 48px 48px 0 0; }
+.footer-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.footer-left { display: flex; flex-direction: column; gap: 36px; }
+.footer-logo img {
+    width: 360px;
+    height: auto;
+    display: block;
+}
+.footer-contact p { margin: 6px 0; font-size: 1rem; }
+.footer-nav { display: flex; flex-direction: column; gap: 24px; align-items: flex-end; font-size: 1rem; font-weight: 700; }
+
+.footer-nav a {
+ transition: transform 0.25s ease;
+}
+
+.footer-nav a:hover{
+  transform: scale(1.05);
+}
+
+/* =========================================
+   レスポンシブ
+   1600px以下：ナビの文字サイズ・ロゴを少し縮小、
+   　　　　　　コンテナ幅を1280pxに調整。
+========================================= */
+@media (max-width:1600px){
+  .main-nav ul { display: flex; gap: 28px; }
+  .main-nav a { font-size: 0.8rem;  }
+  .header-cta { display: flex; gap: 12px; }
+  .header-cta .btn { padding: 8px 20px; font-size: 0.8rem; }
+
+  .nav-pill {
+    gap: 28px;
+    padding: 12px 24px 12px 48px;
+  }
+
+  .btn img{
+      width:16px;
+      height:16px;
+  }
+  .logo img {
+      width: 280px;
+      height: auto;
+      display: block;
+  }
+
+  .hero-waves {
+    position: absolute;
+    top: -36px;
+    width: 100%;
+    z-index: 0;
+    opacity: 0.9;
+    transform: scaleY(86%);
+  }
+
+  .course-carousel { gap: 24px;}
+
+  /* サイト全体の最大幅コンテナ：Figma上のデザイン幅(1440px)に合わせ、
+     左右は常に48pxの余白を確保する */
+  .container,
+  .section-inner,
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .career-illust {
+    position: absolute;
+    left: -2px;
+    bottom: -36px;
+    width: 300px;
+    height: auto;
+    z-index:4;
+  }
+}
+
+/* =========================================
+   レスポンシブ
+   1200px以下：ナビをさらに縮小。
+========================================= */
+@media (max-width:1200px){
+  .main-nav ul { display: flex; gap: 24px; }
+  .main-nav a { font-size: 0.7rem;  }
+  .header-cta { display: flex; gap: 8px; }
+  .header-cta .btn { padding: 8px 20px; font-size: 0.7rem; }
+
+  .nav-pill {
+    gap: 20px;
+    padding: 8px 16px 8px 40px;
+  }
+  .btn img{
+      width:16px;
+      height:16px;
+  }
+  .logo img {
+      width: 240px;
+      height: auto;
+      display: block;
+  }
+}
+
+/* =========================================
+   レスポンシブ
+   1024px以下：ハンバーガーメニューに切り替え、
+   　　　　　　各セクションを1カラムに、
+   　　　　　　Career の Sticky Card も解除して通常表示に。
+========================================= */
+@media (max-width: 1024px) {
+  .hero-inner, .about-inner, .career-body, .ba-grid, .interview-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+  .footer-nav { align-items: center; }
+  .footer-brand { justify-content: center; }
+  .cta-grid { grid-template-columns: 1fr; }
+  .course-card { flex-basis: min(300px, 82vw); }
+
+  /* ハンバーガーメニューへ切り替え */
+  .nav-pill { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-pill.is-open {
+    display: flex; flex-direction: column; align-items: stretch;
+    position: fixed; top: 64px; left: 12px; right: 12px; width: auto;
+    background: #fff; border-radius: 20px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12); z-index: 90;
+    padding: 20px;
+  }
+  .nav-pill.is-open .main-nav ul { flex-direction: column; gap: 16px; }
+  .nav-pill.is-open .header-cta { flex-direction: column; margin-top: 16px; }
+
+  /* Career：Sticky Card を解除して通常のブロック表示に戻す */
+  .career .section-heading { margin-bottom: 48px; }
+  .career-sticky {
+    position: static;
+    top: auto;
+    z-index: auto;
+    padding-bottom: 0;
+  }
+  .career-card { min-height: 0; }
+  .career-list { gap: 60px; }
+  .career-illust { left: 12px; bottom: -20px; width: 110px; height: 140px; }
+}
+
+@media (max-width: 640px) {
+  .container, .header-inner, .section-inner, .footer-inner { padding-left: 24px; padding-right: 24px; }
+  .hero-inner { padding-left: 24px; padding-right: 24px; }
+
+  .interview-panel { padding: 48px 24px; border-radius: 28px; }
+  .before-after { padding: 48px 0; border-radius: 28px; }
+  .ba-content { padding: 0 24px; }
+  .ba-bgtext { font-size: 6rem; }
+  .career-card { padding: 50px 20px 24px; }
+  .career-label { left: 20px; font-size: 0.85rem; padding: 8px 16px; }
+  .course-card { flex-basis: min(260px, 86vw); }
+}
+
+/* =========================================================
+   ===== INTERVIEW DETAIL（在校生の声 個別記事ページ） =====
+   共通コンポーネント（.section-heading / .placeholder-img /
+   .container / .btn / .marquee / .cta-* / .site-footer 等）は
+   上のトップページ用スタイルをそのまま流用。
+   ここではこのページ専用のパーツだけ追加する（接頭辞 iv-）。
+========================================================= */
+
+/* ---- 記事ヘッダー ---- */
+.iv-hero { padding-top: 48px; padding-bottom: 168px; }
+
+.iv-hero-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.iv-hero-heading { margin: 0; }
+.iv-eyebrow {
+  display: block;
+  font-family: "Dela Gothic One", "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: #000;
+  margin-bottom: 8px;
+}
+.iv-title {
+  display: block;
+  font-family: "Dela Gothic One", "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  font-size: clamp(2.4rem, 3.5rem, 4.2rem);
+  color: #1670FF;
+}
+
+.iv-student-meta {
+  text-align: right;
+  color: #1670FF;
+  font-weight: 900;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+.iv-student-meta p { margin: 0; }
+
+.iv-hero-photo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iv-hero-img {
+  width: 100%;
+  height: 580px;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.iv-hero-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.iv-tag {
+  position: absolute;
+  right: 32px;
+  background: #1670FF;
+  color: #fff;
+  font-weight: 900;
+  font-size: 2.4rem;
+  padding: 0 36px;
+}
+
+.iv-tag--1 { bottom: 114px; right: 72px;}
+.iv-tag--2 { bottom: 36px; right: 36px; }
+
+.iv-tag--1,.iv-tag--2 {
+  clip-path: inset(0 100% 0 0);
+  animation: tagWipe 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.iv-tag--1 {
+  animation-delay: 0.6s;
+}
+
+.iv-tag--2 {
+  animation-delay: 1s;
+}
+
+@keyframes tagWipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ---- Q&A 共通パーツ（白背景パート／満版ブルーパート 両方で使う） ---- */
+.iv-qa-section { padding-top: 0; }
+
+.iv-qa {
+  display: flex;
+  justify-content: space-between;
+  gap: 168px;
+  align-items: center;
+  margin-bottom: 168px;
+  padding: 0 96px;
+}
+
+.iv-qa:last-child { margin-bottom: 0; }
+/* 写真が先に来るreverse版は、列幅を入れ替えてテキスト側を常に広く保つ */
+.iv-qa--reverse {
+  display: flex;
+  justify-content: space-between;
+}
+
+.iv-qa-heading {
+  position: relative;
+  padding-left: 18px;
+  margin: 0 0 20px;
+  color: #1670FF;
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+.iv-qa-heading::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 3px; bottom: 3px;
+  width: 4px;
+  border-radius: 2px;
+  background: #1670FF;
+}
+.iv-qa-heading--light { color: #fff; }
+.iv-qa-heading--light::before { background: #fff; }
+
+.iv-qa-text p {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.8;
+  flex-wrap: wrap;
+}
+.iv-qa--light .iv-qa-text p { color: #FFF; }
+
+.iv-qa-photo { 
+  display: block;
+  border-radius: 24px;
+  width: 420px;
+  flex: 0 0 420px;
+  overflow: hidden;
+  
+  
+}
+.iv-qa-photo img{ 
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+/* ---- 満版ブルーパート ---- */
+.iv-story {
+  position: relative;
+  background: #1670FF;
+  color: #fff;
+  padding: 240px 0 100px;
+  margin-top: 48px;
+  border-radius: 800px 800px 0 0 / 400px 400px 0 0;
+  overflow: hidden;
+}
+
+/* ---- 白いメッセージカード ---- */
+.iv-message-card {
+  max-width: 1200px;
+  margin: 0 auto 100px;
+  background: #fff;
+  color: #1a1a1a;
+  border-radius: 28px;
+  padding: 56px 48px;
+  text-align: center;
+}
+.iv-message-heading {
+  margin: 0 0 32px;
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #1670FF;
+}
+.iv-message-photo {
+  max-width: 840px;
+  min-height: 260px;
+  margin: 0 auto 32px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.iv-message-card p {
+  margin: 0;
+  font-weight: 700;
+  line-height: 2;
+  font-size: 1.1rem;
+}
+
+/* ---- More Interview カード（トップページの interview-card-back を簡略流用） ---- */
+.iv-more-card {
+  display: block;
+  max-width: 340px;
+  margin: 40px auto 0;
+  background: #fff;
+  color: #1a1a1a;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.25s ease;
+}
+.iv-more-card:hover { transform: translateY(-6px); }
+
+
+/* ---- レスポンシブ ---- */
+@media (max-width: 1024px) {
+  .iv-qa,
+  .iv-qa--reverse { grid-template-columns: 1fr; }
+  .iv-qa--reverse .iv-qa-photo { order: -1; }
+  .iv-story { border-radius: 80px 80px 0 0; }
+  .iv-hero-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .iv-student-meta { text-align: left; }
+}
+
+@media (max-width: 640px) {
+  .iv-hero-img { min-height: 260px; }
+  .iv-tag { right: 16px; font-size: 0.9rem; padding: 8px 16px; }
+  .iv-tag--2 { right: 32px; }
+  .iv-message-card { padding: 40px 24px; }
+  .iv-story { padding: 80px 0 64px; }
+  .iv-qa { margin-bottom: 64px; gap: 32px; }
+}

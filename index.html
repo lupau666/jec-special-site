@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日本電子専門学校 Webデザイン科 | 特設サイト</title>
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="img/appleicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=MuseoModerno:wght@700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+    <a href="#top">
+    <img src="img/logo_b_l.svg" alt="日本電子専門学校 Webデザイン科">
+    </a>
+    </div>
+    <div class="nav-pill">
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#about">学科紹介</a></li>
+          <li><a href="#course">授業内容</a></li>
+          <li><a href="#before-after">先輩たちの成長</a></li>
+          <li><a href="#career">卒業進路</a></li>
+        </ul>
+      </nav>
+      <div class="header-cta">
+        <a href="https://www.jec.ac.jp/event/oc/" target="_blank" rel="noopener noreferrer" class="btn btn--orange"> <span class="btn-label">オープンキャンパス <img src="img/calemder.svg" alt="オープンキャンパス"></span></a>
+        <a href="https://www.jec.ac.jp/request/" target="_blank" rel="noopener noreferrer" class="btn btn--green"> <span class="btn-label">資料請求 <img src="img/paper.svg" alt="資料請求"></span></a>
+      </div>
+    </div>
+    <button class="nav-toggle" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section id="top" class="hero">
+  <div class="hero-waves" aria-hidden="true">
+  <svg viewBox="0 0 1440 788" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- 保留你原本超漂亮的漸層色 -->
+      <linearGradient id="paint0_linear_191_101" x1="120" y1="240.297" x2="1318.5" y2="496.797" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#0AD498"/>
+        <stop offset="0.501211" stop-color="#6D7EFF"/>
+        <stop offset="0.980769" stop-color="#FA7C7C"/>
+      </linearGradient>
+    </defs>
+    
+    <!-- 🌟 這條線是完美的中心骨架，並且使用 stroke-width="90" 撐出原本的粗度 -->
+    <path class="animated-wave" 
+          d="M -120 120 C 50 100, 120 60, 180 84 C 230 110, 100 400, 45 580 C 10 710, 180 650, 320 520 C 470 380, 620 230, 700 180 C 780 130, 700 450, 650 600 C 610 720, 750 730, 870 600 C 990 470, 1150 250, 1260 140 C 1370 30, 1420 300, 1350 630 C 1310 780, 1480 750, 1600 450 C 1650 350, 1680 380, 1729 409" 
+          stroke="url(#paint0_linear_191_101)" 
+          stroke-width="90" 
+          stroke-linecap="round" 
+          fill="none" />
+  </svg>
+</div>
+
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <h1 class="hero-title">
+        <span class="line1">夢を、<mark class="mark-blue">自分の手</mark>で</span>
+        <span class="line2"><mark class="mark-orange">カタチ</mark>にしよう</span>
+      </h1>
+      <p class="hero-lead">Web制作のすべてを学んで、アイデアを世界へ届けよう</p>
+        <a href="https://www.jec.ac.jp/event/oc/" target="_blank" rel="noopener noreferrer" class="btn btn--orange btn--lg">
+          <span class="btn-label">オープンキャンパスを参加してみる <img src="img/calemder.svg" alt=""></span>
+        </a>
+    </div>
+
+    <div class="hero-gallery">
+      <div class="hero-photo g1"><img src="img/hero1.jpeg" alt="授業風景 写真1"></div>
+      <div class="hero-photo g2"><img src="img/hero2.jpg" alt="授業風景 写真2"></div>
+      <div class="hero-photo g3"><img src="img/hero3.jpg" alt="授業風景 写真3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section about">
+  <div class="section-inner about-inner">
+    <div class="about-text">
+      <h2 class="section-heading"><span class="heading-en">About</span><span class="heading-ja">学科紹介</span></h2>
+      <p class="about-catch">3つの力を組み合わせ<br>Webのプロになる</p>
+      <p class="about-tags">
+        <span class="tag tag--blue">デザイン</span>×<span class="tag tag--green">コーディング</span>×<span class="tag tag--coral">企画</span>
+      </p>
+      <p class="about-desc">
+        3つの分野を横断的に学び、<br>
+        課題解決ができる<br>
+        Webクリエイターを目指します。
+      </p>
+    </div>
+
+    <div class="about-pic">
+      <img src="img/about_graphic.svg" alt="3つの力を組み合わせ">
+    </div>
+  
+</section>
+
+<!-- ===== COURSE ===== -->
+<section id="course" class="section course">
+  <div class="section-inner">
+    <h2 class="section-heading"><span class="heading-en">Course</span><span class="heading-ja">授業内容</span></h2>
+
+    <div class="course-carousel">
+      <button class="carousel-btn prev" aria-label="前へ"><img src="img/arrow_l.svg" alt="left arrow"></button>
+
+      <div class="course-viewport">
+        <div class="course-track">
+
+            <article class="course-card">
+              <img src="img/coding.jpg" alt="コーディング授業" class="course-thumb">
+
+              <h3>コーディング</h3>
+
+              <p>HTML、CSS、JavaScriptを学び、デザインをWebサイトとして実装する技術を身につけます。基礎から実践まで学び、自分のアイデアを形にできるようになります。</p>
+            </article>
+
+            <article class="course-card">
+              <img src="img/uiux.jpg" alt="UI/UX実習" class="course-thumb">
+
+              <h3>UI/UX実習</h3>
+
+              <p>Figma、Photoshop、Illustratorを使いながら、Webサイトの設計やビジュアルデザインを学びます。見た目の美しさだけでなく、ユーザーが迷わず使える体験を考えながら、伝わるデザインを制作します。</p>
+            </article>
+
+            <article class="course-card">
+              <img src="img/plan.jpg" alt="企画書＆プレゼン" class="course-thumb">
+
+              <h3>企画書＆プレゼン</h3>
+
+              <p>クライアントの課題やニーズを分析し、Webサイトの企画を考える力を身につけます。企画書の作成や論理的な思考を学び、課題解決につながる提案ができるようになります。</p>
+            </article>
+
+            <article class="course-card">
+              <img src="img/jobs.jpg" alt="就職活動リテラシー" class="course-thumb">
+
+              <h3>就職活動リテラシー</h3>
+
+              <p>履歴書の作成や面接対策を学び、就職活動に必要なスキルを身につけます。自信を持って将来の進路を選べるようになります。</p>
+            </article>
+
+        </div>
+      </div>
+
+      <button class="carousel-btn next" aria-label="次へ"><img src="img/arrow_r.svg" alt="right arrow"></button>
+    </div>
+
+    <div class="carousel-dots">
+      <span class="dot dot--active" data-index="0"></span>
+      <span class="dot" data-index="1"></span>
+      <span class="dot" data-index="2"></span>
+      <span class="dot" data-index="3"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INTERVIEW ===== -->
+<section class="section interview">
+  <div class="container">
+    
+    <div class="interview-panel">
+      <svg class="interview-wave" viewBox="0 0 1344 719" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M-57.5 301.629C-48.1667 349.129 14 468.629 107.5 344.129C207.975 210.341 232 32.1287 360.5 60.6287C524.753 97.0582 79.5 809.129 379 788.629C678.5 768.129 727.5 -10.3714 1025 42.6286C1322.5 95.6286 908.414 618.976 1145.5 640.129C1280 652.129 1260 230.129 1402.5 289.129"
+              fill="none" stroke="#04BC84" stroke-width="80"/>
+      </svg>
+
+      <div class="interview-inner">
+        <h2 class="section-heading section-heading--light">
+          <span class="heading-en">Interview</span>
+          <span class="heading-ja">在校生の声</span>
+        </h2>
+
+        <div class="interview-grid">
+  
+          <article class="interview-card">
+            <div class="interview-card-inner">
+              
+              <div class="interview-card-front">
+                <div class="front-content">
+                  <h3 class="front-message">失敗しても当たり前<br>成功したら男前</h3>
+                </div>
+                <div class="front-footer">
+                  <span class="front-badge">2年生</span>
+                  <p class="front-name">陳 昶誌 さん</p>
+                </div>
+              </div>
+              
+              <div class="interview-card-back">
+                <div class="interview-thumb-wrap">
+                <div class="interview-thumb"></div>
+                <img src="img/interview_card1.png" class="interview-person" alt="人物">
+              </div>
+                <h3 class="back-title">Webデザイナー 志望</h3>
+                
+                <div class="back-footer">
+                  <div class="back-info">
+                    <span class="back-badge">2年生</span>
+                    <div class="interview-name">
+                      陳 昶誌 さん <span class="interview-from">台湾 出身</span> 
+                    </div>
+                  </div>
+                  <a href="interview/interview-d.html" class="arrow-btn">→</a>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <article class="interview-card">
+            <div class="interview-card-inner">
+              
+              <div class="interview-card-front">
+                <div class="front-content">
+                  <h3 class="front-message">自分のペースで<br>着実に高みへ</h3>
+                </div>
+                <div class="front-footer">
+                  <span class="front-badge">2年生</span>
+                  <p class="front-name">高 翊晴 さん</p>
+                </div>
+              </div>
+
+             <div class="interview-card-back">
+              <div class="interview-thumb-wrap">
+                <div class="interview-thumb"></div>
+                <img src="img/interview_card2.png" class="interview-person" alt="人物">
+              </div>
+              <h3 class="back-title">エンジニア 志望</h3>
+
+              <div class="back-footer">
+                <div class="back-info">
+                  <span class="back-badge">2年生</span>
+                  <div class="interview-name">
+                    高 翊晴 さん <span class="interview-from">台湾 出身</span>
+                  </div>
+                </div>
+                <a href="interview/interview-e.html" class="arrow-btn">→</a>
+              </div>
+            </div>
+
+            </div>
+          </article>
+          
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- ===== BEFORE -> AFTER ===== -->
+<section id="before-after">
+<div class="section before-after-wrap">
+  <div class="before-after">
+    <div class="ba-bgtext" aria-hidden="true">
+      <div class="ba-row"><div class="ba-row-track"><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span></div></div>
+      <div class="ba-row"><div class="ba-row-track"><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span></div></div>
+      <div class="ba-row"><div class="ba-row-track"><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span></div></div>
+      <div class="ba-row"><div class="ba-row-track"><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span></div></div>
+      <div class="ba-row"><div class="ba-row-track"><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span></div></div>
+      <div class="ba-row"><div class="ba-row-track"><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span></div></div>
+      <div class="ba-row"><div class="ba-row-track"><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span></div></div>
+      <div class="ba-row"><div class="ba-row-track"><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span><span class="ba-row-group">PRO PRO PRO PRO PRO PRO PRO PRO PRO PRO </span></div></div>
+    </div>
+    <div class="ba-content">
+      <h2 class="ba-title">Before <div class="ba-arrowsall"><span class="ba-arrows1">▶</span><span class="ba-arrows2">▶</span><span class="ba-arrows3">▶</span></div>After</h2>
+      <p class="ba-sub">未経験から、<mark class="mark-yellow">プロ</mark>の現場で通用する実力へ</p>
+
+      <div class="ba-grid">
+        
+        <div class="ba-card ba-card--indigo">
+          <div class="ba-head">
+            <h3>1年生前期</h3>
+            <span>自己紹介サイト</span>
+          </div>
+          <div class="ba-body">
+            <div class="ba-thumb">
+              <img src="img/beforepic.jpg" alt="before画像">
+            </div>
+            <p>パソコンの基本操作やデザインの基礎、HTML、CSSの書き方からスタート。まずは自分自身のことを伝える、初めてのWebサイト制作に挑戦します。</p>
+          </div>
+        </div>
+
+        <div class="ba-card ba-card--green">
+          <div class="ba-head">
+            <h3>2年生前期</h3>
+            <span>企業連携サイト</span>
+          </div>
+          <div class="ba-body">
+            <div class="ba-thumb">
+              <img src="img/work1.jpg" alt="after画像">
+            </div>
+            <p>企画・デザイン・コーディングのすべてを掛け合わせ、実際の企業が抱える課題をWebの力で解決。プロさながらの視点で、実践的なリニューアルに挑みます。</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ===== WORKS ===== -->
+<section id="works" class="section works">
+  <div class="section-inner">
+    <h2 class="section-heading section-heading--line">
+      <span class="line"></span>
+      <span class="heading-block"><span class="heading-en">Works</span></span>
+      <span class="line"></span>
+    </h2>
+    <p class="heading-ja center">学生作品</p>
+  </div>
+
+  <div class="works-marquee">
+    <div class="works-track">
+      <div class="works-thumb"> <img src="img/work1.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work2.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work3.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work4.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work5.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work6.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work7.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work8.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work9.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work10.jpg" alt="学生作品1"></div>
+
+      <!-- 無限ループのため複製 -->
+      <div class="works-thumb"> <img src="img/work1.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work2.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work3.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work4.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work5.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work6.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work7.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work8.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work9.jpg" alt="学生作品1"></div>
+      <div class="works-thumb"> <img src="img/work10.jpg" alt="学生作品1"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAREER ===== -->
+<section id="career" class="section career">
+  <div class="section-inner">
+    <h2 class="section-heading"><span class="heading-en">Career</span><span class="heading-ja">卒業進路</span></h2>
+
+      <div class="career-list">
+
+        <div class="career-sticky">
+          <article class="career-card career-card--blue">
+            <span class="career-label-blue">Webデザイナー</span>
+            <div class="career-body">
+              <img class="career-thumb" src="img/designer.jpg" alt="Webデザイナー">
+              <div class="career-jobs">
+                <span class="career-jobs-title-blue">主な就職先</span>
+                <ul>
+                  <li>LINEヤフー</li>
+                  <li>博報堂アイ・スタジオ</li>
+                  <li>電通デジタル</li>
+                  <li>LIG</li>
+                  <li>ドワンゴ</li>
+                  <li>CCG WORKINGHEADS</li>
+                </ul>
+              </div>
+            </div>
+            <img class="career-illust" src="img/i_designer.png" alt="Webデザイナーのイラスト">
+          </article>
+        </div>
+
+        <div class="career-sticky">
+          <article class="career-card career-card--green">
+            <span class="career-label-green">エンジニア</span>
+            <div class="career-body">
+              <img class="career-thumb" src="img/engineer.jpg" alt="エンジニア">
+              <div class="career-jobs">
+                <span class="career-jobs-title-green">主な就職先</span>
+                <ul>
+                  <li>楽天</li>
+                  <li>サイバーエージェント</li>
+                  <li>グリー</li>
+                  <li>DeNA</li>
+                  <li>ワンゴジュウゴ</li>
+                  <li>リゲルソフト</li>
+                </ul>
+              </div>
+            </div>
+            <img class="career-illust" src="img/i_enginer.png" alt="エンジニアのイラスト">
+          </article>
+        </div>
+
+        <div class="career-sticky">
+          <article class="career-card career-card--red">
+            <span class="career-label-red">Webディレクター</span>
+            <div class="career-body">
+              <img class="career-thumb" src="img/director.jpg" alt="Webディレクター">
+              <div class="career-jobs">
+                <span class="career-jobs-title-red">主な就職先</span>
+                <ul>
+                  <li>キノトロープ</li>
+                  <li>伊藤園</li>
+                  <li>わかさ生活</li>
+                  <li>エクスチェンジ</li>
+                  <li>ホットファクトリー</li>
+                  <li>メンバーズ</li>
+                </ul>
+              </div>
+            </div>
+            <img class="career-illust" src="img/i_director.png" alt="Webディレクターのイラスト">
+          </article>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- ===== OPEN CAMPUS MARQUEE ===== -->
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-group">
+      <span>OPEN CAMPUS</span><span>OPEN CAMPUS</span><span>OPEN CAMPUS</span><span>OPEN CAMPUS</span>
+    </div>
+    <div class="marquee-group" aria-hidden="true">
+      <span>OPEN CAMPUS</span><span>OPEN CAMPUS</span><span>OPEN CAMPUS</span><span>OPEN CAMPUS</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CTA CARDS ===== -->
+<section id="opencampus" class="section cta-cards">
+  <div class="cta-waves" aria-hidden="true">
+    <svg class="wave wave--green" viewBox="0 0 1440 581" preserveAspectRatio="xMidYMid slice">
+      <path d="M-107 125.145C-71.1632 67.2143 40.4231 9.3552 112.021 58.5245C209.031 125.145 -31.521 490.2 184.5 537.993C400.521 585.786 463.484 -3.26938 627 58.5241C790.516 120.318 600.477 432.252 833 453.493C1065.52 474.733 1071.5 76.8691 1194 125.145C1316.5 173.421 1287.48 495.286 1475.5 503.493C1663.52 511.699 1593.5 266.11 1549.16 173.421"
+            stroke="#6EFCD1" stroke-width="50" fill="none"/>
+    </svg>
+
+    <svg class="wave wave--purple" viewBox="0 0 865 802" preserveAspectRatio="xMidYMid slice">
+      <path d="M-236.5 233.577C-206.5 163.077 -141.5 90.0775 -65.5 52.0776C-1.87292 20.2642 229.5 49.5772 279.5 160.577C329.5 271.577 395.321 598.489 575 543.178C741 492.077 455.5 348.077 262 420.077C68.5002 492.077 130.956 717.577 474.5 717.577C665 717.577 681 670.077 844 767.077"
+            stroke="#B2BBFF" stroke-width="70" fill="none"/>
+    </svg>
+
+    <svg class="wave wave--pink" viewBox="0 0 821 1065" preserveAspectRatio="xMidYMid slice">
+      <path d="M16.8159 1027.93C403.146 848.927 62.6158 649.427 239.816 585.427C461.316 505.427 341.816 790.427 443.859 880.927C545.903 971.427 710.359 869.427 609.359 645.427C520.545 448.454 268.816 404.927 365.816 284.927C462.816 164.927 632.15 323.702 773.816 250.427C904.316 182.927 900.816 62.4268 849.316 35.4268"
+            stroke="#FFABAB" stroke-width="70" fill="none"/>
+    </svg>
+  </div>
+  
+  <div class="section-inner cta-grid">
+    <a href="https://www.jec.ac.jp/event/oc/" target="_blank" rel="noopener noreferrer" class="cta-card cta-card--orange">
+      <div class="cta-photo">
+        <img class="oc-pic" src="img/oc.jpg" alt="オープンキャンパス">
+        <span class="cta-title">オープン<br>キャンパス</span>
+      </div>
+      <div class="cta-footer">
+        <p>未経験でも大丈夫！<br>先生と先輩がサポートする<br>楽しい体験授業はこちら。</p>
+        <span class="arrow-circle"><img src="img/oc-arrow-orange.svg" alt="o-arrow"></span>
+      </div>
+    </a>
+
+    <a href="https://www.jec.ac.jp/request/" target="_blank" rel="noopener noreferrer" id="document" class="cta-card cta-card--green">
+      <div class="cta-photo">
+        <img class="paper-pic" src="img/paper.jpg" alt="資料請求">
+        <span class="cta-title">資料請求</span>
+      </div>
+      <div class="cta-footer">
+        <p>どんな授業があるの？<br>気になる学校のすべてが<br>わかるパンフレット。</p>
+        <span class="arrow-circle"><img src="img/oc-arrow-green.svg" alt="g-arrow"></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-logo">
+        <a href="#top">
+        <img src="img/logo_w_l.svg" alt="日本電子専門学校 Webデザイン科">
+        </a>
+      </div>
+
+      <div class="footer-contact">
+        <p>〒169-8522 東京都新宿区百人町1-25-4</p>
+        <p>フリーコール：0120-00-9691</p>
+        <p>E-Mail：jp@jec.ac.jp</p>
+      </div>
+    </div>
+
+    <nav class="footer-nav">
+      <a href="#about">学科紹介</a>
+      <a href="#course">授業内容</a>
+      <a href="#before-after">先輩たちの成長</a>
+      <a href="#career">卒業進路</a>
+    </nav>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
