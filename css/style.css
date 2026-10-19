@@ -1044,21 +1044,22 @@ mark { background: none; padding: 0 2px; }
   margin-bottom: 96px;
 }
 
-.career-list { display: block; }
-.career-sticky + .career-sticky { margin-top: 240px; }
+.career-list { display: flex; flex-direction: column; gap: 140px; }
+.career-sticky + .career-sticky { margin-top: 0; }
 
 /* サイト共通ヘッダー（sticky, 高さ約114px）と重ならないよう、
    十分な余白を取ってから積み上げを開始する。
    カード間の間隔も広めに取り、下のカードの色が少し覗くようにする。 */
 .career-sticky {
-  position: sticky;
+  position: static;
 }
-.career-sticky:nth-of-type(1) { top: 128px; z-index: 1; }
-.career-sticky:nth-of-type(2) { top: 184px; z-index: 2; }
+.career-sticky:nth-of-type(1),
+.career-sticky:nth-of-type(2),
 .career-sticky:nth-of-type(3) {
-  position: relative;
-  margin-top: 440px;
-  z-index: 3;
+  position: static;
+  top: auto;
+  margin-top: 0;
+  z-index: auto;
 }
 
 .career-card {
@@ -1135,7 +1136,7 @@ mark { background: none; padding: 0 2px; }
   position: absolute;
   left: -2px;
   bottom: -36px;
-  width: 360px;
+  width: 420px;
   height: auto;
   z-index:4;
 }
@@ -1373,7 +1374,7 @@ mark { background: none; padding: 0 2px; }
     position: absolute;
     left: -2px;
     bottom: -36px;
-    width: 300px;
+    width: 380px;
     height: auto;
     z-index:4;
   }
@@ -1440,8 +1441,8 @@ mark { background: none; padding: 0 2px; }
     padding-bottom: 0;
   }
   .career-card { min-height: 0; }
-  .career-list { gap: 60px; }
-  .career-illust { left: 12px; bottom: -20px; width: 110px; height: 140px; }
+  .career-list { gap: 96px; }
+  .career-illust { left: 4px; bottom: -24px; width: 150px; height: auto; }
 }
 
 @media (max-width: 640px) {
@@ -1690,12 +1691,1249 @@ mark { background: none; padding: 0 2px; }
   .iv-hero-top { flex-direction: column; align-items: flex-start; gap: 16px; }
   .iv-student-meta { text-align: left; }
 }
+@media (max-width: 640px) {
+
+  /* =========================
+     HERO - MOBILE
+  ========================= */
+
+  .hero {
+    min-height: auto;
+    margin-top: 0;
+    padding: 60px 0 80px;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    display: contents;
+  }
+
+  .hero-copy {
+    display: contents;
+  }
+
+  /* 標題 */
+  .hero-title {
+    order: 2;
+    font-size: clamp(2.3rem, 10vw, 3.5rem);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .hero-title .line1,
+  .hero-title .line2 {
+    display: block;
+  }
+
+  /* 說明 */
+  .hero-lead {
+    order: 2;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    line-height: 1.9;
+  }
+
+
+  /* =========================
+     PHOTO
+     固定、不飄動
+  ========================= */
+
+  .hero-gallery {
+    position: relative;
+    display: block;
+    width: calc(100% - 40px);
+    height: 300px;
+    margin: 0 auto 28px;
+    order: 1;
+  }
+
+  .hero-photo {
+    position: absolute;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .hero-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* 左上 */
+  .hero-photo.g1 {
+    width: 52%;
+    height: 150px;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    z-index: 2;
+  }
+
+  /* 右上 */
+  .hero-photo.g2 {
+    width: 52%;
+    height: 150px;
+    top: 35px;
+    left: auto;
+    right: 0;
+    bottom: auto;
+    z-index: 1;
+  }
+
+  /* 中下 */
+  .hero-photo.g3 {
+    width: 52%;
+    height: 150px;
+    top: 145px;
+    left: 24%;
+    right: auto;
+    bottom: auto;
+    z-index: 3;
+  }
+
+
+  /* =========================
+     CTA
+     照片下面
+  ========================= */
+
+  .hero-copy .btn {
+    order: 3;
+    width: 100%;
+    max-width: 320px;
+    margin-top: 35px;
+    align-self: center;
+  }
+
+}
+
+/* =========================================================
+   FINAL RESPONSIVE OVERRIDES
+   640px以下を中心に、文字・ボタン・画像・カードの比率を調整
+   ※既存CSSの下に置くことで、既存デザインを崩さず上書きします。
+========================================================= */
 
 @media (max-width: 640px) {
-  .iv-hero-img { min-height: 260px; }
-  .iv-tag { right: 16px; font-size: 0.9rem; padding: 8px 16px; }
-  .iv-tag--2 { right: 32px; }
-  .iv-message-card { padding: 40px 24px; }
-  .iv-story { padding: 80px 0 64px; }
-  .iv-qa { margin-bottom: 64px; gap: 32px; }
+
+  /* ---------- 共通 ---------- */
+  .container,
+  .header-inner,
+  .section-inner,
+  .footer-inner,
+  .hero-inner {
+    width: 100%;
+    max-width: none;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .section-heading {
+    margin-bottom: 40px;
+  }
+
+  .heading-en {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  .heading-ja {
+    font-size: 0.95rem;
+    margin-top: 2px;
+  }
+
+  .about .section-heading,
+  .course .section-heading,
+  .career .section-heading {
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+
+  .about .section-heading .heading-ja,
+  .course .section-heading .heading-ja,
+  .career .section-heading .heading-ja {
+    font-size: 0.9rem;
+  }
+
+  /* ---------- HEADER ---------- */
+  .site-header {
+    border-radius: 0 0 16px 16px;
+  }
+
+  .header-inner {
+    min-height: 64px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 12px;
+  }
+
+  .logo {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .logo img {
+    width: min(190px, 72vw);
+    height: auto;
+  }
+
+  .nav-toggle {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+  }
+
+  .nav-pill.is-open {
+    top: 60px;
+    left: 12px;
+    right: 12px;
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .nav-pill.is-open .main-nav ul {
+    gap: 12px;
+  }
+
+  .nav-pill.is-open .main-nav a {
+    display: block;
+    padding: 5px 2px;
+    font-size: 0.95rem;
+  }
+
+  .nav-pill.is-open .header-cta {
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .nav-pill.is-open .header-cta .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: auto;
+    margin-top: 0;
+    padding: 52px 0 68px;
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .hero-copy {
+    display: contents;
+  }
+
+  .hero-title {
+    order: 2;
+    width: 100%;
+    margin: 0;
+    font-size: clamp(1.9rem, 8.6vw, 2.75rem);
+    line-height: 1.28;
+    letter-spacing: 0.025em;
+  }
+
+  .hero-title .line1,
+  .hero-title .line2 {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    padding: 4px 8px;
+    margin: 0 0 8px;
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  .hero-lead {
+    order: 2;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 8px 0 0;
+    padding: 7px 10px;
+    font-size: clamp(0.72rem, 3.1vw, 0.92rem);
+    line-height: 1.65;
+    white-space: normal;
+  }
+
+  .hero-copy .btn {
+    order: 3;
+    display: flex;
+    width: 100%;
+    max-width: 330px;
+    min-height: 52px;
+    margin: 20px auto 0;
+    padding: 13px 16px;
+    justify-content: center;
+    gap: 9px;
+    border-radius: 12px;
+    font-size: clamp(0.85rem, 3.6vw, 1rem);
+    white-space: nowrap;
+  }
+
+  .hero-copy .btn .btn-label {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    line-height: 1.3;
+  }
+
+  .hero-copy .btn img {
+    width: 17px !important;
+    height: 17px !important;
+    flex: 0 0 17px;
+  }
+
+  /* Heroの波形は小画面で内容に干渉しないようにする */
+  .hero-waves {
+    top: 0;
+    height: 100%;
+    transform: none;
+    opacity: 0.72;
+  }
+
+  .hero-waves svg {
+    width: 100%;
+    height: 100%;
+    transform: none;
+  }
+
+  /* ---------- HERO PHOTO COLLAGE ---------- */
+  .hero-gallery {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1.2 / 1;
+    margin: 0 0 28px;
+    order: 1;
+  }
+
+  .hero-photo {
+    position: absolute;
+    animation: none !important;
+    transform: none !important;
+    border-width: 3px;
+    border-radius: 14px;
+  }
+
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-photo.g1 {
+    width: 46%;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    top: 0;
+    left: 1%;
+    right: auto;
+    bottom: auto;
+    z-index: 2;
+  }
+
+  .hero-photo.g2 {
+    width: 57%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    top: 7%;
+    left: auto;
+    right: 0;
+    bottom: auto;
+    z-index: 1;
+  }
+
+  .hero-photo.g3 {
+    width: 57%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    top: auto;
+    left: 21%;
+    right: auto;
+    bottom: 0;
+    z-index: 3;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about {
+    padding-top: 56px;
+    padding-bottom: 64px;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .about-catch {
+    font-size: clamp(1.7rem, 7vw, 2.2rem);
+    line-height: 1.3;
+    margin-bottom: 24px;
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .tag {
+    padding: 4px 9px;
+    font-size: 0.85rem;
+  }
+
+  .about-desc {
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+
+  .about-pic {
+    width: min(100%, 360px);
+    justify-self: center;
+  }
+
+  /* ---------- COURSE ---------- */
+  .course-carousel {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .course-viewport {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+  }
+
+  .course-track {
+    gap: 12px;
+  }
+
+  .course-card {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+    padding: 16px;
+    border-radius: 18px;
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .course-card.isActive {
+    transform: scale(1);
+  }
+
+  .course-thumb {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin-bottom: 16px;
+    border-radius: 12px;
+  }
+
+  .course-card h3 {
+    margin-bottom: 14px;
+    font-size: 1.05rem;
+  }
+
+  .course-card p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.75;
+  }
+
+  .carousel-btn {
+    width: 30px;
+    height: 64px;
+    flex: 0 0 30px;
+    border-width: 2px;
+    border-radius: 16px;
+  }
+
+  .carousel-btn img {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .carousel-dots {
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* ---------- INTERVIEW ---------- */
+  .interview {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .interview-panel {
+    padding: 48px 20px;
+    border-radius: 24px;
+  }
+
+  .interview-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    max-width: 100%;
+  }
+
+  .interview-card {
+    height: 370px;
+  }
+
+  .interview-card-front,
+  .interview-card-back {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .front-message {
+    font-size: clamp(1.25rem, 5.8vw, 1.55rem);
+    line-height: 1.55;
+    padding: 12px;
+  }
+
+  .front-badge {
+    font-size: 0.9rem;
+    padding: 4px 12px;
+  }
+
+  .front-name {
+    font-size: 1.1rem;
+  }
+
+  .interview-thumb {
+    min-height: 155px;
+    border-radius: 10px;
+  }
+
+  .interview-person {
+    height: 220px;
+    bottom: -95px;
+  }
+
+  .interview-card:hover .interview-person {
+    bottom: -18px;
+  }
+
+  .back-title {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .back-badge {
+    font-size: 0.82rem;
+    padding: 4px 11px;
+  }
+
+  .interview-name {
+    gap: 7px;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .arrow-btn {
+    width: 46px;
+    height: 46px;
+    font-size: 1.35rem;
+  }
+
+  /* ---------- BEFORE / AFTER ---------- */
+  .before-after-wrap {
+    padding: 56px 0;
+  }
+
+  .before-after {
+    padding: 68px 0 100px;
+    border-radius: 24px;
+  }
+
+  .ba-content {
+    padding: 0 20px;
+  }
+
+  .ba-bgtext {
+    top: 190px;
+    font-size: 4rem;
+  }
+
+  .ba-title {
+    gap: 10px;
+    margin: 22px 0 8px;
+    max-height: none;
+    font-size: clamp(2.1rem, 11vw, 3.4rem);
+    line-height: 1;
+  }
+
+  .ba-arrows1,
+  .ba-arrows2,
+  .ba-arrows3 {
+    font-size: 1.25rem;
+  }
+
+  .ba-sub {
+    margin-bottom: 28px;
+    font-size: clamp(1.15rem, 5.8vw, 1.65rem);
+    line-height: 1.45;
+  }
+
+  .ba-grid {
+    grid-template-columns: 1fr;
+    border-radius: 16px;
+  }
+
+  .ba-head {
+    padding: 24px 16px;
+  }
+
+  .ba-head h3 {
+    font-size: clamp(1.7rem, 8vw, 2.2rem);
+    line-height: 1.15;
+  }
+
+  .ba-head span {
+    margin-top: 8px;
+    font-size: 0.95rem;
+  }
+
+  .ba-body {
+    padding: 18px;
+  }
+
+  .ba-thumb {
+    margin-bottom: 16px;
+    border-radius: 10px;
+  }
+
+  .ba-card p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.86rem;
+    line-height: 1.8;
+  }
+
+  /* ---------- WORKS ---------- */
+  .works {
+    padding-top: 24px;
+    padding-bottom: 64px;
+  }
+
+  .section-heading--line {
+    gap: 10px;
+  }
+
+  .section-heading--line .line {
+    max-width: none;
+  }
+
+  .heading-ja.center {
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+  }
+
+  .works-track {
+    gap: 12px;
+  }
+
+  .works-thumb {
+    width: clamp(240px, 72vw, 320px);
+    border-radius: 10px;
+  }
+
+  /* ---------- CAREER ---------- */
+  .career .section-heading {
+    margin-bottom: 48px;
+  }
+
+  .career-list {
+    gap: 88px;
+  }
+
+  .career-sticky + .career-sticky {
+    margin-top: 0;
+  }
+
+  .career-card {
+    min-height: 0;
+    padding: 46px 18px 22px;
+    border-radius: 18px;
+  }
+
+  .career-label-blue,
+  .career-label-green,
+  .career-label-red {
+    top: -15px;
+    left: 18px;
+    padding: 6px 22px;
+    font-size: 0.92rem;
+  }
+
+  .career-body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .career-thumb {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .career-jobs-title-blue,
+  .career-jobs-title-green,
+  .career-jobs-title-red {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding: 8px;
+    font-size: 0.92rem;
+    border-radius: 8px;
+  }
+
+  .career-jobs ul {
+    gap: 8px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .career-illust {
+    left: 4px;
+    bottom: -14px;
+    width: 128px;
+    height: auto;
+  }
+
+  /* ---------- OPEN CAMPUS MARQUEE ---------- */
+  .marquee {
+    height: 66px;
+  }
+
+  .marquee-group span {
+    font-size: 42px;
+    padding: 0 16px;
+  }
+
+  /* ---------- CTA CARDS ---------- */
+  #opencampus {
+    padding-top: 56px;
+  }
+
+  .cta-cards {
+    padding-top: 24px;
+    padding-bottom: 64px;
+  }
+
+  .cta-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .cta-card {
+    border-radius: 16px;
+  }
+
+  .cta-photo {
+    height: auto;
+  }
+
+  .cta-photo img,
+  .cta-photo .cta-thumb {
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .cta-title {
+    padding: 22px 24px;
+    font-size: clamp(1.55rem, 7.5vw, 2.05rem);
+    line-height: 1.25;
+    border-radius: 16px 0 20px 0;
+  }
+
+  .cta-footer {
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .cta-footer p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+
+  .arrow-circle {
+    width: 62px;
+    height: 62px;
+  }
+
+  .arrow-circle img {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  .site-footer {
+    padding: 64px 0;
+    border-radius: 28px 28px 0 0;
+  }
+
+  .footer-inner {
+    gap: 32px;
+  }
+
+  .footer-left {
+    width: 100%;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .footer-logo img {
+    width: min(240px, 72vw);
+  }
+
+  .footer-contact p {
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .footer-nav {
+    gap: 12px;
+    font-size: 0.88rem;
+  }
+}
+
+/* 360px以下：さらに縮小して横溢れを防止 */
+@media (max-width: 360px) {
+
+  .container,
+  .header-inner,
+  .section-inner,
+  .footer-inner,
+  .hero-inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .logo img {
+    width: min(175px, 68vw);
+  }
+
+  .hero {
+    padding-top: 44px;
+    padding-bottom: 56px;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .hero-lead {
+    font-size: 0.72rem;
+  }
+
+  .hero-copy .btn {
+    max-width: none;
+    font-size: 0.82rem;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .hero-gallery {
+    aspect-ratio: 1.14 / 1;
+    margin-top: 24px;
+  }
+
+  .interview-card {
+    height: 350px;
+  }
+
+  .before-after {
+    padding-bottom: 80px;
+  }
+
+  .ba-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .ba-title {
+    font-size: 2rem;
+  }
+
+  .ba-sub {
+    font-size: 1.1rem;
+  }
+
+  .cta-footer {
+    padding: 18px 16px;
+  }
+
+  .arrow-circle {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* =========================================================
+   HERO - 1024px以下
+   スマートフォン・タブレットは
+   写真 → タイトル/説明 → CTA の順番に統一
+========================================================= */
+@media (max-width: 1024px) {
+  .hero {
+    min-height: auto;
+    margin-top: 0;
+    padding: 56px 0 72px;
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .hero-copy {
+    display: contents;
+  }
+
+  /* ---- 1. PHOTO ---- */
+  .hero-gallery {
+    order: 1;
+    position: relative;
+    width: min(100%, 700px);
+    height: auto;
+    aspect-ratio: 1.2 / 1;
+    margin: 0 auto 36px;
+  }
+
+  .hero-photo {
+    position: absolute;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-photo.g1 {
+    width: 46%;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    top: 0;
+    left: 1%;
+    right: auto;
+    bottom: auto;
+    z-index: 2;
+  }
+
+  .hero-photo.g2 {
+    width: 57%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    top: 7%;
+    left: auto;
+    right: 0;
+    bottom: auto;
+    z-index: 1;
+  }
+
+  .hero-photo.g3 {
+    width: 57%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    top: auto;
+    left: 21%;
+    right: auto;
+    bottom: 0;
+    z-index: 3;
+  }
+
+  /* ---- 2. TITLE + LEAD ---- */
+  .hero-title {
+    order: 2;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    line-height: 1.25;
+    letter-spacing: 0.025em;
+  }
+
+  .hero-title .line1,
+  .hero-title .line2 {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 10px;
+    padding: 4px 12px;
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  .hero-lead {
+    order: 2;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 10px auto 0;
+    padding: 8px 14px;
+    text-align: center;
+    font-size: clamp(0.82rem, 2vw, 1.05rem);
+    line-height: 1.7;
+  }
+
+  /* ---- 3. CTA ---- */
+  .hero-copy .btn {
+    order: 3;
+    display: flex;
+    width: min(100%, 360px);
+    min-height: 56px;
+    margin: 28px auto 0;
+    padding: 14px 20px;
+    justify-content: center;
+    border-radius: 12px;
+    gap: 10px;
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    white-space: nowrap;
+  }
+
+  .hero-copy .btn .btn-label {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.3;
+  }
+
+  .hero-copy .btn img {
+    width: 18px !important;
+    height: 18px !important;
+    flex: 0 0 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-gallery {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 8.6vw, 2.75rem);
+  }
+
+  .hero-title .line1,
+  .hero-title .line2 {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+/* =========================================================
+   HERO FINAL FIX - 1024px以下
+   照片縮小＋背景SVG維持原始比例與位置
+========================================================= */
+@media (max-width: 1024px) {
+  .hero-waves {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    transform: none;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  .hero-waves svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1440 / 788;
+    transform: none;
+    overflow: visible;
+  }
+
+  .hero-gallery {
+    width: min(100%, 560px);
+    aspect-ratio: 1.28 / 1;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-gallery {
+    width: min(calc(100% - 24px), 480px);
+    aspect-ratio: 1.28 / 1;
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-gallery {
+    width: calc(100% - 16px);
+    max-width: 420px;
+    aspect-ratio: 1.28 / 1;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-gallery {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 1.25 / 1;
+  }
+}
+
+/* =========================================================
+   CAREER final responsive behavior
+   Desktop (>1024px): sticky card stacking
+   1024px以下: normal vertical cards
+   ========================================================= */
+
+/* Desktop: restore sticky behavior */
+@media (min-width: 1025px) {
+  .career-list {
+    display: block;
+  }
+
+  .career-sticky {
+    position: sticky;
+    top: 128px;
+    z-index: 1;
+    padding-bottom: 0;
+  }
+
+  .career-sticky:nth-of-type(1) {
+    position: sticky;
+    top: 128px;
+    z-index: 1;
+  }
+
+  .career-sticky:nth-of-type(2) {
+    position: sticky;
+    top: 184px;
+    z-index: 2;
+  }
+
+  .career-sticky:nth-of-type(3) {
+    position: relative;
+    top: auto;
+    margin-top: 440px;
+    z-index: 3;
+  }
+
+  .career-sticky + .career-sticky {
+    margin-top: 240px;
+  }
+
+  .career-illust {
+    width: 420px;
+    left: -2px;
+    bottom: -36px;
+  }
+}
+
+/* Tablet / mobile: disable sticky and increase vertical spacing */
+@media (max-width: 1024px) {
+  .career-list {
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+  }
+
+  .career-sticky,
+  .career-sticky:nth-of-type(1),
+  .career-sticky:nth-of-type(2),
+  .career-sticky:nth-of-type(3) {
+    position: static;
+    top: auto;
+    margin-top: 0;
+    padding-bottom: 0;
+    z-index: auto;
+  }
+
+  .career-sticky + .career-sticky {
+    margin-top: 0;
+  }
+
+  .career-card {
+    min-height: 0;
+  }
+
+  .career-illust {
+    width: 280px;
+    left: 4px;
+    bottom: -8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .career-list {
+    gap: 96px;
+  }
+
+  .career-illust {
+    width: 200px;
+    left: 4px;
+    bottom: -16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .cta-card {
+    width: 100%;
+  }
+ 
+  .cta-photo {
+    /* 原本如果是固定高度，可以降低 */
+    aspect-ratio: 1.35 / 1;
+  }
+
+  .cta-title {
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+  }
+
+  .cta-footer {
+    padding: 20px;
+  }
+
+  .cta-footer p {
+    font-size: 0.8rem;
+  }
 }
